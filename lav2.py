@@ -1,5 +1,8 @@
 import tkinter as tk
 
+from Demos.SystemParametersInfo import new_w
+
+
 class Participante:
     def __init__(self, name, institution):
         super().__init__()
@@ -8,6 +11,34 @@ class Participante:
 
     def mostrar_info(self):
         return f"Nombre: {self.name}, Instituciom: {self.institution}"
+
+
+class BandaEscolar(Participante):
+    def __init__(self, name, institution, categoria, puntaje):
+        super().__init__(name, institution)
+        self._category = categoria
+        self._points = puntaje
+
+    @property
+    def categoria(self):
+        return self._category
+    @categoria.setter
+    def categoria(self, new_cat):
+        if new_cat.lower() != "basico" or new_cat.lower() != "diversificado" or new_cat.lower() != "primaria":
+            print("No es una categoria válida...")
+        else:
+            self._category = new_cat
+
+    @property
+    def puntaje(self):
+        return self._points
+    @puntaje.setter
+    def puntaje(self, nuevo_puntaje):
+        if nuevo_puntaje < 0 or nuevo_puntaje>10:
+            print("Puntaje no válido")
+        else:
+            self._points = nuevo_puntaje
+
 
 class Concurso:
     def inscribir_banda(self):
