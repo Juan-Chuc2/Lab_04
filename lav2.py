@@ -1,5 +1,7 @@
 import tkinter as tk
-bandas_db = []
+bandas_db = {}
+
+
 #.
 #---------------------------------------------------------------------------------------------------------------------
 class Participante:
@@ -106,6 +108,7 @@ class Concurso:
         ventana_eval.title("Registrar Evaluación")
         ventana_eval.geometry("400x300")
 
+        #search_box = tk.Entry()
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
         ventana_listado = tk.Toplevel(ventana)
