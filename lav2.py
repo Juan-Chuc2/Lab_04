@@ -1,5 +1,5 @@
 import tkinter as tk
-bandas_db = {}
+bandas_db = []
 #.
 #---------------------------------------------------------------------------------------------------------------------
 class Participante:
@@ -91,16 +91,6 @@ class BandaEscolar(Participante):
     def mostrar_info(self):
         return f"Nombre: {self.name}| Institución: {self.institution}|Categoría: {self._category}"
 
-    @property
-    def puntaje_rit(self):
-        return self._points_ritmo
-
-    @puntaje_rit.setter
-    def puntaje_rit(self, nuevo_puntaje):
-        if nuevo_puntaje < 0 or nuevo_puntaje > 10:
-            print("Puntaje no válido")
-        else:
-            self._points_ritmo = nuevo_puntaje
 
 
 class Concurso:
