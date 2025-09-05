@@ -1,5 +1,11 @@
 import tkinter as tk
 
+class Participante:
+    def __init__(self, name, institution):
+        super().__init__()
+        self.name = name
+        self.institution = institution
+
 class Concurso:
     pass
 
