@@ -1,5 +1,6 @@
 import tkinter as tk
 bandas_db = {}
+#.
 #---------------------------------------------------------------------------------------------------------------------
 class Participante:
     def __init__(self, name, institution):
