@@ -1,8 +1,6 @@
 import tkinter as tk
-
-from Demos.SystemParametersInfo import new_w
-
-
+bandas_db = {}
+#---------------------------------------------------------------------------------------------------------------------
 class Participante:
     def __init__(self, name, institution):
         super().__init__()
@@ -10,14 +8,23 @@ class Participante:
         self.institution = institution
 
     def mostrar_info(self):
-        return f"Nombre: {self.name}, Instituciom: {self.institution}"
+        return f"Nombre: {self.name}, Institución: {self.institution}"
 
 
 class BandaEscolar(Participante):
-    def __init__(self, name, institution, categoria, puntaje):
+    def __init__(self, name, institution, categoria):
         super().__init__(name, institution)
         self._category = categoria
-        self._points = puntaje
+
+
+        self._points_ritmo = 0
+        self._points_uniformidad = 0
+        self._points_coreografia = 0
+        self._points_alineacion = 0
+        self._points_puntualidad = 0
+
+        self.total = 0
+        self.avg = 0
 
     @property
     def categoria(self):
@@ -30,14 +37,69 @@ class BandaEscolar(Participante):
             self._category = new_cat
 
     @property
-    def puntaje(self):
-        return self._points
-    @puntaje.setter
-    def puntaje(self, nuevo_puntaje):
+    def puntaje_rit(self):
+        return self._points_ritmo
+    @puntaje_rit.setter
+    def puntaje_rit(self, nuevo_puntaje):
         if nuevo_puntaje < 0 or nuevo_puntaje>10:
             print("Puntaje no válido")
         else:
-            self._points = nuevo_puntaje
+            self._points_ritmo = nuevo_puntaje
+
+    @property
+    def puntaje_unifor(self):
+        return self._points_uniformidad
+    @puntaje_unifor.setter
+    def puntaje_unifor(self, nuevo_puntaje):
+        if nuevo_puntaje < 0 or nuevo_puntaje > 10:
+            print("Puntaje no válido")
+        else:
+            self._points_uniformidad = nuevo_puntaje
+
+    @property
+    def puntaje_coreo(self):
+        return self._points_coreografia
+    @puntaje_coreo.setter
+    def puntaje_coreo(self, nuevo_puntaje):
+        if nuevo_puntaje < 0 or nuevo_puntaje > 10:
+            print("Puntaje no válido")
+        else:
+            self._points_coreografia = nuevo_puntaje
+
+    @property
+    def puntaje_ali(self):
+        return self._points_alineacion
+    @puntaje_ali.setter
+    def puntaje_ali(self, nuevo_puntaje):
+        if nuevo_puntaje < 0 or nuevo_puntaje > 10:
+            print("Puntaje no válido")
+        else:
+            self._points_alineacion = nuevo_puntaje
+
+    @property
+    def puntaje_punt(self):
+        return self._points_puntualidad
+    @puntaje_punt.setter
+    def puntaje_punt(self, nuevo_puntaje):
+        if nuevo_puntaje < 0 or nuevo_puntaje > 10:
+            print("Puntaje no válido")
+        else:
+            self._points_puntualidad = nuevo_puntaje
+
+
+    def mostrar_info(self):
+        return f"Nombre: {self.name}| Institución: {self.institution}|Categoría: {self._category}"
+
+    @property
+    def puntaje_rit(self):
+        return self._points_ritmo
+
+    @puntaje_rit.setter
+    def puntaje_rit(self, nuevo_puntaje):
+        if nuevo_puntaje < 0 or nuevo_puntaje > 10:
+            print("Puntaje no válido")
+        else:
+            self._points_ritmo = nuevo_puntaje
 
 
 class Concurso:
