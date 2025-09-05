@@ -1,5 +1,14 @@
 import tkinter as tk
 
+class Concurso:
+    pass
+
+
+
+
+
+
+#---------------------------------------------------------------------------------------------------------------
 def inscribir_banda():
     print("Se abrió la ventana: Inscribir Banda")
     ventana_inscribir = tk.Toplevel(ventana)
