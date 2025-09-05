@@ -10,41 +10,37 @@ class Participante:
         return f"Nombre: {self.name}, Instituciom: {self.institution}"
 
 class Concurso:
-    pass
+    def inscribir_banda(self):
+        print("Se abrió la ventana: Inscribir Banda")
+        ventana_inscribir = tk.Toplevel(ventana)
+        ventana_inscribir.title("Inscribir Banda")
+        ventana_inscribir.geometry("400x300")
 
+    def registrar_evaluacion(self):
+        print("Se abrió la ventana: Registrar Evaluación")
+        ventana_eval = tk.Toplevel(ventana)
+        ventana_eval.title("Registrar Evaluación")
+        ventana_eval.geometry("400x300")
 
+    def listar_bandas(self):
+        print("Se abrió la ventana: Listado de Bandas")
+        ventana_listado = tk.Toplevel(ventana)
+        ventana_listado.title("Listado de Bandas")
+        ventana_listado.geometry("400x300")
 
+    def ver_ranking(self):
+        print("Se abrió la ventana: Ranking Final")
+        ventana_ranking = tk.Toplevel(ventana)
+        ventana_ranking.title("Ranking Final")
+        ventana_ranking.geometry("400x300")
 
+    def salir(self):
+        print("Aplicación cerrada")
+        ventana.quit()
 
 
 #---------------------------------------------------------------------------------------------------------------
-def inscribir_banda():
-    print("Se abrió la ventana: Inscribir Banda")
-    ventana_inscribir = tk.Toplevel(ventana)
-    ventana_inscribir.title("Inscribir Banda")
-    ventana_inscribir.geometry("400x300")
-
-def registrar_evaluacion():
-    print("Se abrió la ventana: Registrar Evaluación")
-    ventana_eval = tk.Toplevel(ventana)
-    ventana_eval.title("Registrar Evaluación")
-    ventana_eval.geometry("400x300")
-
-def listar_bandas():
-    print("Se abrió la ventana: Listado de Bandas")
-    ventana_listado = tk.Toplevel(ventana)
-    ventana_listado.title("Listado de Bandas")
-    ventana_listado.geometry("400x300")
-
-def ver_ranking():
-    print("Se abrió la ventana: Ranking Final")
-    ventana_ranking = tk.Toplevel(ventana)
-    ventana_ranking.title("Ranking Final")
-    ventana_ranking.geometry("400x300")
-
-def salir():
-    print("Aplicación cerrada")
-    ventana.quit()
+concurso_septiembre = Concurso()
 
 ventana = tk.Tk()
 ventana.title("Concurso de Bandas - Quetzaltenango")
@@ -53,12 +49,12 @@ ventana.geometry("500x300")
 barra_menu = tk.Menu(ventana)
 
 menu_opciones = tk.Menu(barra_menu, tearoff=0)
-menu_opciones.add_command(label="Inscribir Banda", command=inscribir_banda)
-menu_opciones.add_command(label="Registrar Evaluación", command=registrar_evaluacion)
-menu_opciones.add_command(label="Listar Bandas", command=listar_bandas)
-menu_opciones.add_command(label="Ver Ranking", command=ver_ranking)
+menu_opciones.add_command(label="Inscribir Banda", command=concurso_septiembre.inscribir_banda)
+menu_opciones.add_command(label="Registrar Evaluación", command=concurso_septiembre.registrar_evaluacion)
+menu_opciones.add_command(label="Listar Bandas", command=concurso_septiembre.listar_bandas)
+menu_opciones.add_command(label="Ver Ranking", command=concurso_septiembre.ver_ranking)
 menu_opciones.add_separator()
-menu_opciones.add_command(label="Salir", command=salir)
+menu_opciones.add_command(label="Salir", command=concurso_septiembre.salir)
 
 barra_menu.add_cascade(label="Opciones", menu=menu_opciones)
 
