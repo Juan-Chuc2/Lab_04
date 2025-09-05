@@ -6,6 +6,9 @@ class Participante:
         self.name = name
         self.institution = institution
 
+    def mostrar_info(self):
+        return f"Nombre: {self.name}, Instituciom: {self.institution}"
+
 class Concurso:
     pass
 
