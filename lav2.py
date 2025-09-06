@@ -145,7 +145,7 @@ class Concurso:
         print("Se abrió la ventana: Registrar Evaluación")
         ventana_eval = tk.Toplevel(ventana)
         ventana_eval.title("Registrar Evaluación")
-        ventana_eval.geometry("400x400")
+        ventana_eval.geometry("500x600")
 
         tk.Label(ventana_eval, text="ID de la Banda:").pack(pady=5)
         entrada_id = tk.Entry(ventana_eval)
@@ -210,7 +210,18 @@ class Concurso:
         print("Se abrió la ventana: Ranking Final")
         ventana_ranking = tk.Toplevel(ventana)
         ventana_ranking.title("Ranking Final")
-        ventana_ranking.geometry("400x300")
+        ventana_ranking.geometry("500x600")
+
+        lista = tk.Listbox(ventana_ranking, width=50, height=15)
+        lista.pack(pady=10)
+
+        if not bandas_db:
+            lista.insert(tk.END, "No hay bandas para rankear aún.")
+        else:
+            ordered_list = sorted(bandas_db.items(), key=lambda x:x[1].avg, reverse=True)
+            for id_banda, banda in ordered_list:
+                promedio = f"{banda.avg:.2f}" if banda.avg > 0 else "N/A"
+                lista.insert(tk.END, f"ID:{id_banda} | {banda.name} | Promedio:{promedio}")
 
     def salir(self):
         print("Aplicación cerrada")
