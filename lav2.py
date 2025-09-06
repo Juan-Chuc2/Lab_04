@@ -1,5 +1,8 @@
 import tkinter as tk
+from tkinter import messagebox
 bandas_db = {}
+import random
+id = random.randint(1000,9999)
 
 
 #.
@@ -102,18 +105,57 @@ class Concurso:
         ventana_inscribir.title("Inscribir Banda")
         ventana_inscribir.geometry("400x300")
 
+        etiqueta1 = tk.Label(ventana_inscribir, text="Escribe el nombre de tu banda: ")
+        etiqueta1.pack(pady=5)
+        entrada1 = tk.Entry(ventana_inscribir)
+        entrada1.pack(pady=5)
+
+        etiqueta2 = tk.Label(ventana_inscribir, text="Escribe la institución: ")
+        etiqueta2.pack(pady=5)
+        entrada2 = tk.Entry(ventana_inscribir)
+        entrada2.pack(pady=5)
+
+        etiqueta3 = tk.Label(ventana_inscribir, text="Escribe la categoría (Basico/Diversificado/Primaria): ")
+        etiqueta3.pack(pady=5)
+        entrada3 = tk.Entry(ventana_inscribir)
+        entrada3.pack(pady=5)
+
+        def guardar_banda():
+            nombre = entrada1.get()
+            institucion = entrada2.get()
+            categoria = entrada3.get()
+
+            if nombre in bandas_db:
+                print(" Ya existe una banda con ese nombre")
+            else:
+                nuevo_id = random.randint(1000, 9999)
+
+                nueva_banda = BandaEscolar(nombre, institucion, categoria)
+                bandas_db[nuevo_id] = nueva_banda
+            messagebox.showinfo(
+                "Banda Inscrita",
+                f"Banda '{nombre}' registrada con éxito.Su ID es: {nuevo_id}"
+            )
+
+            ventana_inscribir.destroy()
+
+        boton_guardar = tk.Button(ventana_inscribir, text="Guardar Banda", command=guardar_banda)
+        boton_guardar.pack(pady=10)
+
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
         ventana_eval = tk.Toplevel(ventana)
         ventana_eval.title("Registrar Evaluación")
         ventana_eval.geometry("400x300")
 
-        #search_box = tk.Entry()
+
+
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
         ventana_listado = tk.Toplevel(ventana)
         ventana_listado.title("Listado de Bandas")
         ventana_listado.geometry("400x300")
+
 
     def ver_ranking(self):
         print("Se abrió la ventana: Ranking Final")
