@@ -196,6 +196,15 @@ class Concurso:
         ventana_listado.title("Listado de Bandas")
         ventana_listado.geometry("400x300")
 
+        lista = tk.Listbox(ventana_listado, width=50, height=15)
+        lista.pack(pady=10)
+
+        if not bandas_db:
+            lista.insert(tk.END, "No hay bandas registradas aún.")
+        else:
+            for id_banda, banda in bandas_db.items():
+                promedio = f"{banda.avg:.2f}" if banda.avg > 0 else "N/A"
+                lista.insert(tk.END, f"ID:{id_banda} | {banda.name} | Promedio:{promedio}")
 
     def ver_ranking(self):
         print("Se abrió la ventana: Ranking Final")
