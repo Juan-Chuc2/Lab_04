@@ -1,6 +1,8 @@
 import tkinter as tk
-bandas_db = []
-#.
+from tkinter import messagebox
+bandas_db = {}
+import random
+id = random.randint(1000, 9999)
 #---------------------------------------------------------------------------------------------------------------------
 class Participante:
     def __init__(self, name, institution):
@@ -99,12 +101,94 @@ class Concurso:
         ventana_inscribir = tk.Toplevel(ventana)
         ventana_inscribir.title("Inscribir Banda")
         ventana_inscribir.geometry("400x300")
+        etiqueta1 = tk.Label(ventana_inscribir, text="Escribe el  nombre de tu banda: ")
+        etiqueta1.pack(pady=5)
+        entrada1 = tk.Entry(ventana_inscribir)
+        entrada1.pack(pady=5)
+
+        etiqueta2 = tk.Label(ventana_inscribir, text="Escribe la institución: ")
+        etiqueta2.pack(pady=5)
+        entrada2 = tk.Entry(ventana_inscribir)
+        entrada2.pack(pady=5)
+
+        etiqueta3 = tk.Label(ventana_inscribir, text="Escribe la categoría (Basico/Diversificado/Primaria): ")
+        etiqueta3.pack(pady=5)
+        entrada3 = tk.Entry(ventana_inscribir)
+        entrada3.pack(pady=5)
+
+        def guardar_banda():
+            nombre = entrada1.get()
+            institucion = entrada2.get()
+            categoria = entrada3.get()
+
+            if nombre in bandas_db:
+                print("Ya existe una banda con ese nombre")
+            else:
+                nuevo_id = random.randint(1000, 9999)
+                nueva_banda = BandaEscolar(nombre, institucion, categoria)
+                bandas_db[nuevo_id] = nueva_banda
+                messagebox.showinfo(
+                    "Banda Inscrita",
+                    f"Banda '{nombre}' registrada con éxito.\nSu ID es: {nuevo_id}"
+                )
+            ventana_inscribir.destroy()
+
+        boton_guardar = tk.Button(ventana_inscribir, text="Guardar Banda", command=guardar_banda)
+        boton_guardar.pack(pady=10)
+
 
     def registrar_evaluacion(self):
         print("Se abrió la ventana: Registrar Evaluación")
         ventana_eval = tk.Toplevel(ventana)
         ventana_eval.title("Registrar Evaluación")
-        ventana_eval.geometry("400x300")
+        ventana_eval.geometry("400x400")
+
+        tk.Label(ventana_eval, text="ID de la Banda:").pack(pady=5)
+        entrada_id = tk.Entry(ventana_eval)
+        entrada_id.pack(pady=5)
+
+        labels = ["Ritmo", "Uniformidad", "Coreografía", "Alineación", "Puntualidad"]
+        entradas = {}
+
+        for label in labels:
+            tk.Label(ventana_eval, text=f"Ingrese puntaje de {label} (0-10):").pack(pady=2)
+            entry = tk.Entry(ventana_eval)
+            entry.pack(pady=2)
+            entradas[label.lower()] = entry
+
+        def guardar_evaluacion():
+            try:
+                id_banda = int(entrada_id.get())  # convertir texto a número
+            except ValueError:
+                messagebox.showerror("Error", "El ID debe ser un número")
+                return
+
+            if id_banda not in bandas_db:
+                messagebox.showerror("Error", "No existe una banda con ese ID")
+                return
+
+            banda = bandas_db[id_banda]
+
+            banda.puntaje_rit = int(entradas["ritmo"].get())
+            banda.puntaje_unifor = int(entradas["uniformidad"].get())
+            banda.puntaje_coreo = int(entradas["coreografía"].get())
+            banda.puntaje_ali = int(entradas["alineación"].get())
+            banda.puntaje_punt = int(entradas["puntualidad"].get())
+
+            banda.total = (banda.puntaje_rit + banda.puntaje_unifor +
+                           banda.puntaje_coreo + banda.puntaje_ali +
+                           banda.puntaje_punt)
+            banda.avg = banda.total / 5
+
+            messagebox.showinfo(
+                "Evaluación Registrada",
+                f"Evaluación guardada para {banda.name} (ID: {id_banda})\n"
+                f"Total: {banda.total}, Promedio: {banda.avg:.2f}"
+            )
+
+            ventana_eval.destroy()
+
+        tk.Button(ventana_eval, text="Guardar Evaluación", command=guardar_evaluacion).pack(pady=15)
 
     def listar_bandas(self):
         print("Se abrió la ventana: Listado de Bandas")
